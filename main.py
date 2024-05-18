@@ -59,8 +59,6 @@ def create_playlist(sp_client: spotipy.Spotify, name='1990-08-24 Billboard 100')
     playlist_id = response['id']
     return playlist_id
 
-
-
 def find_song(sp_client: spotipy.Spotify, song, artist):
     query = f'{song} artist:{artist}'
     search_result = sp_client.search(query, type='track', limit=1)
@@ -145,13 +143,13 @@ def find_album_tracks(sp_client: spotipy.Spotify, uri):
         return tracks_uris
 
 if __name__ == "__main__":
-    # date = str(input("Which year do You want to travel to? Type the date in this format YYYY-MM-DD:     "))
-    # songs, artists = read_billboard_site(date)
-    # sp = spotify_login()
-    # playlist_id = create_playlist(sp, name=f'{date} Billboard 100')
-    # prepare_playlist(sp, playlist_id, songs, artists)
-
-    albums, artists = read_metalstorm(2020)
+    date = str(input("Which year do You want to travel to? Type the date in this format YYYY-MM-DD:     "))
+    songs, artists = read_billboard_site(date)
     sp = spotify_login()
-    playlist_id = create_playlist(sp, name=f'Metalstorm best albums of 2020')
-    prepare_metalstorm_playlist(sp, playlist_id, albums, artists)
+    playlist_id = create_playlist(sp, name=f'{date} Billboard 100')
+    prepare_playlist(sp, playlist_id, songs, artists)
+
+    # albums, artists = read_metalstorm(2020)
+    # sp = spotify_login()
+    # playlist_id = create_playlist(sp, name=f'Metalstorm best albums of 2020')
+    # prepare_metalstorm_playlist(sp, playlist_id, albums, artists)
